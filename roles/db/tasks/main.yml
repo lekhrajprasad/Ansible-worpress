@@ -23,7 +23,7 @@
     password: "{{MY_DB_PASSWORD}}" 
     priv: '*.*:ALL'
     state: present    
-    host: "*"
+    host: "%"
 
 - name: Create a new database with name devopsdb
   mysql_db:
