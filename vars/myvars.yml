@@ -1,0 +1,5 @@
+---
+MY_DB_NAME: "devopsdb"
+MY_DB_USER: "admin"
+MY_DB_PASSWORD: "admin123"
+MY_DB_HOST_SERVER: "172.31.23.5"

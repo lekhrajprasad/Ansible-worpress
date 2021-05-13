@@ -1,0 +1,5 @@
+---
+- name: my apache restart
+  systemd:
+    name: httpd
+    state: restarted

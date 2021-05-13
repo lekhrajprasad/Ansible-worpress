@@ -1,0 +1,31 @@
+---
+- name: Installing maria db server
+  yum:
+    name: '{{item}}'
+    state: present
+  loop:
+    - MySQL-python
+    - mariadb-server
+
+- name: enableing maria db software
+  systemd:
+    name: mariadb
+    enabled: yes
+
+- name: restart mariadb service
+  systemd:
+    name: mariadb
+    state: restarted
+
+- name: Creating user admin
+  mysql_user:
+    name: "{{MY_DB_USER}}"
+    password: "{{MY_DB_PASSWORD}}" 
+    priv: '*.*:ALL'
+    state: present    
+    host: "*"
+
+- name: Create a new database with name devopsdb
+  mysql_db:
+    name: "{{MY_DB_NAME}}"
+    state: present    

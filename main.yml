@@ -1,0 +1,14 @@
+---
+- name: wordpress applications installation
+  hosts: app
+  vars_files:
+    - ./vars/myvars.yml
+  roles:
+    - app
+
+- name: maria db installation
+  hosts: db
+  vars_files:
+    - ./vars/myvars.yml
+  roles:
+    - db

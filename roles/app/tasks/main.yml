@@ -1,0 +1,45 @@
+---
+- name: Installing php
+  command: amazon-linux-extras install -y lamp-mariadb10.2-php7.2 php7.2
+
+- name: Installing Apache
+  yum:
+    name: httpd
+    state: present
+
+- name: enabling apache
+  systemd:
+    name: httpd
+    enabled: yes
+  notify: my apache restart
+
+- name: download packeg word press
+  #get_url: url=https://wordpress.org/latest.tar.gz dest=/tmp/wordpress.tar.gz force=yes
+  get_url:
+    url: https://wordpress.org/latest.tar.gz
+    dest: /tmp/wordpress.tar.gz
+    force: yes
+
+- name: Alligning the configuration
+  shell: |
+    cd /tmp
+    tar -xzf wordpress.tar.gz
+    cp -r wordpress/* /var/www/html/
+
+- name: Copying the wordpress configuration file
+  template:
+    src: wp-config.php
+    dest: /var/www/html/
+  notify: my apache restart
+
+- name: Setting the permissions
+  file:
+    path: /var/www
+    state: directory
+    recurse: yes
+    owner: apache
+    group: apache
+    mode: "0755"
+  notify: my apache restart
+
+
