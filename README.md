@@ -5,6 +5,8 @@
 - ansible-playbook main.yml -v
 - to encript values of vars/myvars.yml with password, run below command
 - ansible-vault encript var/myvars.yml
+- now execute below command to run playbook
+- ansible-playbook --ask-vault-pass main.yml -v
 - to decript
 - ansible-vault decrypt var/myvars.yml
 - provide passwd which was used for encryption
